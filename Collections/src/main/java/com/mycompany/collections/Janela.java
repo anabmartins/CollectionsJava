@@ -54,8 +54,18 @@ public class Janela extends javax.swing.JFrame {
         });
 
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnRemover.setText("Remover");
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -124,17 +134,38 @@ public class Janela extends javax.swing.JFrame {
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         String nomeProduto = input.getText();
         produtos.add(nomeProduto);
-        input.setText(" ");
+        input.setText("");
         JOptionPane.showMessageDialog(this, "Produto cadastrado");
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
         String listagem = "Produtos:\n";
-        for(String s:produtos){ // para cada string contida em produtos
+        for(String s : produtos){ // para cada string contida em produtos
             listagem += "\n" + s;
         }
         JOptionPane.showMessageDialog(this, listagem);
     }//GEN-LAST:event_btnListarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        String produto = input.getText();
+        String mensagem = "Produto não encontrado!";
+        int pos = produtos.indexOf(produto);
+        if(pos != -1){
+            mensagem = "Produto editado com sucesso!";
+            produtos.set(pos, JOptionPane.showInputDialog("Novo nome do produto"));   
+        }
+        JOptionPane.showMessageDialog(this, mensagem);
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+        String produto = input.getText();
+        String mensagem = "Produto não encontrado!";
+        int pos = produtos.indexOf(produto);
+        if(pos != -1){
+            mensagem = "Produto excluido com sucesso!";  
+            produtos.remove(pos);
+        }
+    }//GEN-LAST:event_btnRemoverActionPerformed
 
 
     public static void main(String args[]) {
